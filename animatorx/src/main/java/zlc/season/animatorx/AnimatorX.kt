@@ -14,11 +14,14 @@ import androidx.annotation.RequiresApi
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.suspendCancellableCoroutine
 
+const val DEFAULT_DURATION = 300L
+val DEFAULT_INTERPOLATOR = LinearInterpolator()
+
 suspend fun View.translationX(
     from: Float,
     to: Float,
-    duration: Long = 2000,
-    interpolator: Interpolator = LinearInterpolator()
+    duration: Long = DEFAULT_DURATION,
+    interpolator: Interpolator = DEFAULT_INTERPOLATOR
 ) = suspendCancellableCoroutine<Unit> { con ->
     animatorOf(TRANSLATION_X, duration, interpolator, con, from, to)
 }
@@ -26,8 +29,8 @@ suspend fun View.translationX(
 suspend fun View.translationY(
     from: Float,
     to: Float,
-    duration: Long = 2000,
-    interpolator: Interpolator = LinearInterpolator()
+    duration: Long = DEFAULT_DURATION,
+    interpolator: Interpolator = DEFAULT_INTERPOLATOR
 ) = suspendCancellableCoroutine<Unit> { con ->
     animatorOf(TRANSLATION_Y, duration, interpolator, con, from, to)
 }
@@ -36,8 +39,8 @@ suspend fun View.translationY(
 suspend fun View.translationZ(
     from: Float,
     to: Float,
-    duration: Long = 2000,
-    interpolator: Interpolator = LinearInterpolator()
+    duration: Long = DEFAULT_DURATION,
+    interpolator: Interpolator = DEFAULT_INTERPOLATOR
 ) = suspendCancellableCoroutine<Unit> { con ->
     animatorOf(TRANSLATION_Z, duration, interpolator, con, from, to)
 }
@@ -45,8 +48,8 @@ suspend fun View.translationZ(
 suspend fun View.scaleX(
     from: Float,
     to: Float,
-    duration: Long = 2000,
-    interpolator: Interpolator = LinearInterpolator()
+    duration: Long = DEFAULT_DURATION,
+    interpolator: Interpolator = DEFAULT_INTERPOLATOR
 ) = suspendCancellableCoroutine<Unit> { con ->
     animatorOf(SCALE_X, duration, interpolator, con, from, to)
 }
@@ -54,8 +57,8 @@ suspend fun View.scaleX(
 suspend fun View.scaleY(
     from: Float,
     to: Float,
-    duration: Long = 2000,
-    interpolator: Interpolator = LinearInterpolator()
+    duration: Long = DEFAULT_DURATION,
+    interpolator: Interpolator = DEFAULT_INTERPOLATOR
 ) = suspendCancellableCoroutine<Unit> { con ->
     animatorOf(SCALE_Y, duration, interpolator, con, from, to)
 }
@@ -63,8 +66,8 @@ suspend fun View.scaleY(
 suspend fun View.alpha(
     from: Float,
     to: Float,
-    duration: Long = 2000,
-    interpolator: Interpolator = LinearInterpolator()
+    duration: Long = DEFAULT_DURATION,
+    interpolator: Interpolator = DEFAULT_INTERPOLATOR
 ) = suspendCancellableCoroutine<Unit> { con ->
     animatorOf(ALPHA, duration, interpolator, con, from, to)
 }
@@ -72,8 +75,8 @@ suspend fun View.alpha(
 suspend fun View.rotation(
     from: Float,
     to: Float,
-    duration: Long = 2000,
-    interpolator: Interpolator = LinearInterpolator()
+    duration: Long = DEFAULT_DURATION,
+    interpolator: Interpolator = DEFAULT_INTERPOLATOR
 ) = suspendCancellableCoroutine<Unit> { con ->
     animatorOf(ROTATION, duration, interpolator, con, from, to)
 }
@@ -81,8 +84,8 @@ suspend fun View.rotation(
 suspend fun View.rotationX(
     from: Float,
     to: Float,
-    duration: Long = 2000,
-    interpolator: Interpolator = LinearInterpolator()
+    duration: Long = DEFAULT_DURATION,
+    interpolator: Interpolator = DEFAULT_INTERPOLATOR
 ) = suspendCancellableCoroutine<Unit> { con ->
     animatorOf(ROTATION_X, duration, interpolator, con, from, to)
 }
@@ -90,8 +93,8 @@ suspend fun View.rotationX(
 suspend fun View.rotationY(
     from: Float,
     to: Float,
-    duration: Long = 2000,
-    interpolator: Interpolator = LinearInterpolator()
+    duration: Long = DEFAULT_DURATION,
+    interpolator: Interpolator = DEFAULT_INTERPOLATOR
 ) = suspendCancellableCoroutine<Unit> { con ->
     animatorOf(ROTATION_Y, duration, interpolator, con, from, to)
 }
@@ -99,8 +102,8 @@ suspend fun View.rotationY(
 suspend fun View.x(
     from: Float,
     to: Float,
-    duration: Long = 2000,
-    interpolator: Interpolator = LinearInterpolator()
+    duration: Long = DEFAULT_DURATION,
+    interpolator: Interpolator = DEFAULT_INTERPOLATOR
 ) = suspendCancellableCoroutine<Unit> { con ->
     animatorOf(X, duration, interpolator, con, from, to)
 }
@@ -108,8 +111,8 @@ suspend fun View.x(
 suspend fun View.y(
     from: Float,
     to: Float,
-    duration: Long = 2000,
-    interpolator: Interpolator = LinearInterpolator()
+    duration: Long = DEFAULT_DURATION,
+    interpolator: Interpolator = DEFAULT_INTERPOLATOR
 ) = suspendCancellableCoroutine<Unit> { con ->
     animatorOf(Y, duration, interpolator, con, from, to)
 }
