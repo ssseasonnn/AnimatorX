@@ -11,8 +11,7 @@ import android.view.View.*
 import android.view.animation.Interpolator
 import android.view.animation.LinearInterpolator
 import androidx.annotation.RequiresApi
-import kotlinx.coroutines.CancellableContinuation
-import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.*
 
 const val DEFAULT_DURATION = 300L
 val DEFAULT_INTERPOLATOR = LinearInterpolator()
@@ -43,6 +42,17 @@ suspend fun View.translationZ(
     interpolator: Interpolator = DEFAULT_INTERPOLATOR
 ) = suspendCancellableCoroutine<Unit> { con ->
     animatorOf(TRANSLATION_Z, duration, interpolator, con, from, to)
+}
+
+suspend fun View.scale(
+    from: Float,
+    to: Float,
+    duration: Long = DEFAULT_DURATION,
+    interpolator: Interpolator = DEFAULT_INTERPOLATOR
+) = coroutineScope {
+    val scaleX = async { scaleX(from, to, duration, interpolator) }
+    val scaleY = async { scaleY(from, to, duration, interpolator) }
+    awaitAll(scaleX, scaleY)
 }
 
 suspend fun View.scaleX(

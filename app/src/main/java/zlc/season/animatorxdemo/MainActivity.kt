@@ -1,10 +1,13 @@
 package zlc.season.animatorxdemo
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
-import zlc.season.animatorx.*
+import zlc.season.animatorx.alpha
+import zlc.season.animatorx.rotation
+import zlc.season.animatorx.scale
+import zlc.season.animatorx.x
 
 class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
@@ -57,11 +60,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     }
 
     private suspend fun animBtn4() {
-        coroutineScope {
-            val scaleX = async { button4.scaleX(1.0f, 3f) }
-            val scaleY = async { button4.scaleY(1.0f, 3f) }
-            awaitAll(scaleX, scaleY)
-        }
+        button4.scale(1.0f, 3f)
     }
 
     private suspend fun animBtn3() {
