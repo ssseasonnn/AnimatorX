@@ -22,7 +22,7 @@ allprojects {
 
 ```gradle
 dependencies {
-	implementation 'com.github.ssseasonnn:AnimatorX:1.0.2'
+	implementation 'com.github.ssseasonnn:AnimatorX:1.0.3'
 }
 ```
 
