@@ -4,7 +4,7 @@
 
 Let Android animation can also use Kotlin Coroutine!
 
-![demo](animator.webm)
+<img src="animator.gif" width="50%" height="50%"/>
 
 ## prepare
 
