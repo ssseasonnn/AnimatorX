@@ -4,7 +4,7 @@
 
 Let Android animation can also use Kotlin Coroutine!
 
-[demo](animator.webm)
+![demo](animator.webm)
 
 ## prepare
 
@@ -46,6 +46,7 @@ launch {
     button.animMarginTop(to = 100f)
     button.animMarginBottom(to = 100f)
 }
+```
 
 - Compose multi anim
 
