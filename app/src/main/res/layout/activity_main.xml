@@ -21,6 +21,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:text="Size Animator"
         android:textColor="@android:color/black"
         android:textSize="15sp"
@@ -85,6 +86,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:text="Margin Animator"
         android:textColor="@android:color/black"
         android:textSize="15sp"
@@ -147,6 +149,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:text="Transition Animator"
         android:textColor="@android:color/black"
         android:textSize="15sp"
@@ -219,6 +222,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:text="Scale and Rotate Animator"
         android:textColor="@android:color/black"
         android:textSize="15sp"
@@ -290,6 +294,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:text="Other Animator"
         android:textColor="@android:color/black"
         android:textSize="15sp"
