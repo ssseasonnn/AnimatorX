@@ -1,82 +1,108 @@
 package zlc.season.animatorxdemo
 
+import android.annotation.SuppressLint
+import android.content.res.Resources
+import android.graphics.RectF
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.core.view.*
+import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.*
-import zlc.season.animatorx.alpha
-import zlc.season.animatorx.rotation
-import zlc.season.animatorx.scale
-import zlc.season.animatorx.x
+import zlc.season.animatorx.*
+import zlc.season.animatorxdemo.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
+class MainActivity : AppCompatActivity() {
 
+    val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+
+    @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
-        button1.setOnClickListener {
-            launch {
-                animBtn1()
-            }
+        var width = 0
+        var height = 0
+
+        binding.root.post {
+            width = binding.root.width
+            height = binding.root.height
         }
 
-        button2.setOnClickListener {
-            launch {
-                animBtn2()
+        binding.apply {
+            btnLeft.click {
+                val oldLeft = testView.left.toFloat()
+                testView.animLeft(to = 0f)
+                delay(200)
+                testView.animLeft(to = oldLeft)
             }
+
+            btnRight.click { testView.runAnim(View::animRight, from = testView.right, to = width) }
+            btnTop.click { testView.runAnim(View::animTop, from = testView.top, to = 0) }
+            btnBottom.click { testView.runAnim(View::animBottom, from = testView.bottom, height) }
+            btnAll.click {
+                testView.runAnim(
+                    View::animRect,
+                    from = RectF(testView.left.toFloat(), testView.top.toFloat(), testView.right.toFloat(), testView.bottom.toFloat()),
+                    to = RectF(0f, 0f, width.toFloat(), height.toFloat())
+                )
+            }
+
+            btnMarginLeft.click { testView.runAnim(View::animMarginStart, from = testView.marginStart, to = width - testView.width) }
+            btnMarginRight.click { testView.runAnim(View::animMarginEnd, from = testView.marginEnd, to = width - testView.width) }
+            btnMarginTop.click { testView.runAnim(View::animMarginTop, from = testView.marginTop, to = height - testView.height) }
+            btnMarginBottom.click { testView.runAnim(View::animMarginBottom, from = testView.marginBottom, to = height - testView.height) }
+
+            btnTx.click { testView.runAnim(View::animTranslationX, from = testView.translationX.toInt(), to = width - testView.right) }
+            btnTy.click { testView.runAnim(View::animTranslationY, from = testView.translationY.toInt(), to = height - testView.bottom) }
+            btnTz.click { testView.runAnim(View::animTranslationZ, from = testView.translationZ.toInt(), to = 100) }
+            btnX.click { testView.runAnim(View::animX, from = testView.x.toInt(), to = width - testView.width) }
+            btnY.click { testView.runAnim(View::animY, from = testView.y.toInt(), to = height - testView.height) }
+            btnXy.click {
+                coroutineScope {
+                    async { testView.runAnim(View::animX, from = testView.x.toInt(), to = width - testView.width) }
+                    async { testView.runAnim(View::animY, from = testView.y.toInt(), to = height - testView.height) }
+                }
+            }
+
+            btnScaleX.click { testView.runAnim(View::animScaleX, from = testView.scaleX.toInt(), to = 3) }
+            btnScaleY.click { testView.runAnim(View::animScaleY, from = testView.scaleY.toInt(), to = 3) }
+            btnScale.click { testView.runAnim(View::animScale, from = testView.scaleX.toInt(), to = 3) }
+
+            btnRotateX.click { testView.runAnim(View::animRotationX, from = testView.rotationX.toInt(), to = 360) }
+            btnRotateY.click { testView.runAnim(View::animRotationY, from = testView.rotationY.toInt(), to = 360) }
+            btnRotate.click { testView.runAnim(View::animRotation, from = testView.rotationX.toInt(), to = 360) }
+
+            btnAlpha.click { testView.runAnim(View::animAlpha, from = testView.alpha.toInt(), to = 0) }
         }
 
-        button3.setOnClickListener {
-            launch {
-                animBtn3()
-            }
-        }
-
-        button4.setOnClickListener {
-            launch {
-                animBtn4()
-            }
-        }
-
-        btn_launch.setOnClickListener {
-            launch {
-                animBtn1()
-                animBtn2()
-                animBtn3()
-                animBtn4()
-            }
-        }
-
-        btn_async.setOnClickListener {
-            launch {
-                val anim1 = async { animBtn1() }
-                val anim2 = async { animBtn2() }
-                val anim3 = async { animBtn3() }
-                val anim4 = async { animBtn4() }
-                awaitAll(anim1, anim2, anim3, anim4)
-            }
-        }
     }
 
-    private suspend fun animBtn4() {
-        button4.scale(1.0f, 3f)
+    private suspend fun View.runAnim(
+        block: suspend View.(Float) -> Unit,
+        from: Int,
+        to: Int
+    ) {
+        block(to.toFloat())
+        delay(200)
+        block(from.toFloat())
     }
 
-    private suspend fun animBtn3() {
-        button3.rotation(0f, 180f)
+    private suspend fun View.runAnim(
+        block: suspend View.(RectF) -> Unit,
+        from: RectF,
+        to: RectF
+    ) {
+        block(to)
+        delay(200)
+        block(from)
     }
 
-    private suspend fun animBtn2() {
-        button2.alpha(1.0f, 0.1f)
-    }
-
-    private suspend fun animBtn1() {
-        button1.x(0f, 800f)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        cancel()
+    private fun View.click(block: suspend () -> Unit) {
+        setOnClickListener {
+            lifecycleScope.launch {
+                block()
+            }
+        }
     }
 }

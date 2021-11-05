@@ -7,12 +7,13 @@ import android.util.Property
 import android.view.View
 import android.view.animation.Interpolator
 import kotlinx.coroutines.CancellableContinuation
+import kotlin.coroutines.resume
 import android.view.ViewGroup.MarginLayoutParams as MLP
 
 internal val LEFT = PropertyImpl("left", View::setLeft, View::getLeft)
-internal val RIGHT = PropertyImpl("right", View::setLeft, View::getLeft)
-internal val TOP = PropertyImpl("top", View::setLeft, View::getLeft)
-internal val BOTTOM = PropertyImpl("bottom", View::setLeft, View::getLeft)
+internal val RIGHT = PropertyImpl("right", View::setRight, View::getRight)
+internal val TOP = PropertyImpl("top", View::setTop, View::getTop)
+internal val BOTTOM = PropertyImpl("bottom", View::setBottom, View::getBottom)
 
 internal val MARGIN_START = MarginPropertyImpl("margin_start", MLP::setMarginStart, MLP::getMarginStart)
 internal val MARGIN_END = MarginPropertyImpl("margin_end", MLP::setMarginEnd, MLP::getMarginEnd)
@@ -66,13 +67,11 @@ internal fun View.animatorOf(
 
         addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
-                con.resumeWith(Result.success(Unit))
+                con.resume(Unit)
             }
         })
         con.invokeOnCancellation {
-            if (isRunning) {
-                cancel()
-            }
+            cancel()
         }
         if (con.isActive) {
             start()
