@@ -74,6 +74,8 @@ class MainActivity : AppCompatActivity() {
             btnRotate.click { testView.runAnim(View::animRotation, from = testView.rotationX.toInt(), to = 360) }
 
             btnAlpha.click { testView.runAnim(View::animAlpha, from = testView.alpha.toInt(), to = 0) }
+            btnWidth.click { testView.runAnim(View::animWidth, from = testView.width, to = width) }
+            btnHeight.click { testView.runAnim(View::animHeight, from = testView.height, to = height) }
         }
 
     }

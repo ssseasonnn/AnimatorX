@@ -20,8 +20,10 @@ internal val MARGIN_END = MarginPropertyImpl("margin_end", MLP::setMarginEnd, ML
 internal val MARGIN_TOP = MarginPropertyImpl("margin_top", MLP::topMargin.setter, MLP::topMargin.getter)
 internal val MARGIN_BOTTOM = MarginPropertyImpl("margin_bottom", MLP::bottomMargin.setter, MLP::bottomMargin.getter)
 
+internal val WIDTH = MarginPropertyImpl("lp_width", MLP::width.setter, MLP::width.getter)
+internal val HEIGHT = MarginPropertyImpl("lp_height", MLP::height.setter, MLP::height.getter)
 
-internal class PropertyImpl(
+class PropertyImpl(
     name: String,
     val setFunc: View.(Int) -> Unit,
     val getFunc: View.() -> Int
@@ -36,7 +38,7 @@ internal class PropertyImpl(
     }
 }
 
-internal class MarginPropertyImpl(
+class MarginPropertyImpl(
     name: String,
     val setParamFunc: MLP.(Int) -> Unit,
     val getParamFunc: MLP.() -> Int
@@ -53,8 +55,7 @@ internal class MarginPropertyImpl(
     }
 }
 
-
-internal fun View.animatorOf(
+fun View.animatorOf(
     property: Property<View, Float>,
     duration: Long,
     interpolator: Interpolator,

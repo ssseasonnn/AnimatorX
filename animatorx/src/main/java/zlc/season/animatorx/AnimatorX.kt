@@ -16,6 +16,26 @@ const val DEFAULT_DURATION = 300L
 val DEFAULT_INTERPOLATOR = LinearInterpolator()
 
 /**
+ * Width animation
+ */
+suspend fun View.animWidth(
+    to: Float,
+    from: Float = WIDTH.get(this),
+    duration: Long = DEFAULT_DURATION,
+    interpolator: Interpolator = DEFAULT_INTERPOLATOR
+) = animator(WIDTH, duration, interpolator, from, to)
+
+/**
+ * Height animation
+ */
+suspend fun View.animHeight(
+    to: Float,
+    from: Float = HEIGHT.get(this),
+    duration: Long = DEFAULT_DURATION,
+    interpolator: Interpolator = DEFAULT_INTERPOLATOR
+) = animator(HEIGHT, duration, interpolator, from, to)
+
+/**
  * Margin start animation
  */
 suspend fun View.animMarginStart(

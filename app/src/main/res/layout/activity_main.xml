@@ -322,20 +322,20 @@
             android:textSize="9sp" />
 
         <Button
-            android:id="@+id/btn_other1"
+            android:id="@+id/btn_width"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:textSize="9sp"
-            android:visibility="invisible" />
+            android:text="width"
+            android:textSize="9sp" />
 
         <Button
-            android:id="@+id/btn_other2"
+            android:id="@+id/btn_height"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:textSize="9sp"
-            android:visibility="invisible" />
+            android:text="height"
+            android:textSize="9sp" />
 
         <Button
             android:id="@+id/btn_other3"
